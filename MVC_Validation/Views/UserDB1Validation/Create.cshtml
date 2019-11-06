@@ -1,0 +1,87 @@
+﻿@model MVC_Validation.Models.UserTable
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create（搭配驗證功能）</title>
+</head>
+<body>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            <!-- ********************  請改成 false ***************************************** -->
+            @Html.ValidationSummary(false, " ****** Html.ValidationSummary ****** ", new { @class = "text-danger" })
+            <!--  設定為 false。一執行就會出現這句錯誤訊息。建議「錯誤訊息」這裡保持空字串 ("") -->
+            <!--  設定為 true。必須將資料送出以後，由第二個 Create動作來觸發 -->
+            <!-- ********************  請改成 false ***************************************** -->
+
+            <div class="form-group">
+                <br /><br />
+                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                    <font color="red">
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </font>   <!--  驗證的警告訊息，如果要變成紅色或其他樣式，建議寫在CSS裡面（class = "text-danger"）。 -->
+                </div>
+            </div>
+
+            <div class="form-group">
+                <br /><br />
+                @Html.LabelFor(model => model.UserSex, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UserSex, new { htmlAttributes = new { @class = "form-control" } })
+                    <font color="red">
+                        @Html.ValidationMessageFor(model => model.UserSex, "", new { @class = "text-danger" })
+                    </font>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <br />--=請使用 Chrome瀏覽器來觀賞，IE 11無法出現效果=--<br />
+                @Html.LabelFor(model => model.UserBirthDay, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UserBirthDay, new { htmlAttributes = new { @class = "form-control" } })
+                    <font color="red">
+                        @Html.ValidationMessageFor(model => model.UserBirthDay, "", new { @class = "text-danger" })
+                    </font>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <br /><br />
+                @Html.LabelFor(model => model.UserMobilePhone, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UserMobilePhone, new { htmlAttributes = new { @class = "form-control" } })
+                    <font color="red">
+                        @Html.ValidationMessageFor(model => model.UserMobilePhone, "", new { @class = "text-danger" })
+                    </font>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <br /><br />
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create（搭配「驗證」）" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+
+</body>
+</html>
